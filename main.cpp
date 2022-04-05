@@ -12,16 +12,17 @@ int main(){
     std::vector<double> arr = {3, 1, 0, 0, 3, 0, 0, 0, 3};
     Matrix a{identity, 3, 3};
     Matrix b{arr, 3, 3};
+    std::cout << a << std::endl;
 //    std::cout << ((a++) == a) << endl;
 //    Matrix c = a;
-    --a;
+//    --a;
 //    std::cout << (c == a) << endl;
-    for(uint i = 0; i < 3; ++i){
-        for(uint j = 0; j < 3; ++j){
-            std::cout << a.mat[i][j] << ", ";
-        }
-        std::cout << std::endl;
-    }
+//    for(uint i = 0; i < 3; ++i){
+//        for(uint j = 0; j < 3; ++j){
+//            std::cout << a.mat[i][j] << ", ";
+//        }
+//        std::cout << std::endl;
+//    }
 //    std::cout << (a != b) << std::endl;
 //    std::cout << b.mat_sum() << std::endl;
 
@@ -39,3 +40,5 @@ int main(){
     return 0;
 }
 
+
+// [1 0 0], [0 1 0], [0 0 1]

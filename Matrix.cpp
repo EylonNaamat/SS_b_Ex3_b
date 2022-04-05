@@ -263,10 +263,22 @@ zich::Matrix zich::Matrix::operator--(int){
     return copy;
 }
 
-std::ostream& zich::operator<<(std::ostream& os, const Matrix& mat){
+std::ostream& zich::operator<<(std::ostream& os, const zich::Matrix& mat){
+    for(uint i = 0; i < mat.row; ++i){
+        os << "[";
+        for(uint j = 0; j < mat.col; ++j){
+            if(j == mat.col -1){
+                os << mat.mat[i][j];
+            }else{
+                os << mat.mat[i][j] << " ";
+            }
+        }
+        os << "]";
+        os << "\n";
+    }
     return os;
 }
 
-std::istream& zich::operator>>(std::istream& is, const Matrix& mat){
+std::istream& zich::operator>>(std::istream& is, const zich::Matrix& mat){
     return is;
 }

@@ -17,29 +17,25 @@ namespace zich{
         Matrix(){
             row = 1;
             col = 1;
-            this->mat = std::vector<std::vector<double>>((uint)1, std::vector<double>((uint)1));
+            this->mat.assign(1, std::vector<double>(1));
             this->mat[0][0] = 1;
         }
         Matrix(std::vector<double> mat, int row, int col){
             if(row < this->min_num || col < this->min_num){
-                std::cout << "1" << std::endl;
                 throw std::invalid_argument("size of matrix not good");
             }
             if(mat.size() != (row * col)){
-                std::cout << "2" << std::endl;
                 throw std::invalid_argument("size of matrix not good!!!");
             }
-            std::cout << "3" << std::endl;
-            this->mat = std::vector<std::vector<double>>((uint)row, std::vector<double>((uint)col));
-            std::cout << "4" << std::endl;
+            this->row = row;
+            this->col = col;
+            this->mat.assign((uint)(this->row), std::vector<double>((uint)this->col));
             for(uint i = 0; i < row; ++i){
                 for(uint j = 0; j < col; ++j){
                     uint pos = (((uint)this->col)*i) + j;
                     this->mat[i][j] = mat[pos];
                 }
             }
-            this->row = row;
-            this->col = col;
         }
         ~Matrix(){};
 
