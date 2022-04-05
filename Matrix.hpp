@@ -3,68 +3,80 @@
 #include <stdexcept>
 
 
-// Matrix a;
-// cin >> a;
 
 namespace zich{
     class Matrix{
-        private:
-            std::vector<std::vector<double>> mat;
-            int row;
-            int col;
+    public:
+        std::vector<std::vector<double>> mat;
+        int row;
+        int col;
+        const static int min_num = 0;
 
-        public:
-            // constructor destructor
-            Matrix(){
-                row = 1;
-                col = 1;
-                this->mat[0][0] = 1;
+    public:
+        // constructor destructor
+        Matrix(){
+            row = 1;
+            col = 1;
+            this->mat = std::vector<std::vector<double>>((uint)1, std::vector<double>((uint)1));
+            this->mat[0][0] = 1;
+        }
+        Matrix(std::vector<double> mat, int row, int col){
+            if(row < this->min_num || col < this->min_num){
+                std::cout << "1" << std::endl;
+                throw std::invalid_argument("size of matrix not good");
             }
-            Matrix(std::vector<double> mat, int row, int col){
-                if(mat.size() != (row * col)){
-                    throw std::exception("size of matrix not good!!!");
-                }
-                this->mat = std::vector<std::vector<double>>(row, std::vector<double>(col));
-                for(int i = 0; i < row; ++i){
-
-                }
-                this->row = row;
-                this->col = col;
+            if(mat.size() != (row * col)){
+                std::cout << "2" << std::endl;
+                throw std::invalid_argument("size of matrix not good!!!");
             }
-            ~Matrix(){};
+            std::cout << "3" << std::endl;
+            this->mat = std::vector<std::vector<double>>((uint)row, std::vector<double>((uint)col));
+            std::cout << "4" << std::endl;
+            for(uint i = 0; i < row; ++i){
+                for(uint j = 0; j < col; ++j){
+                    uint pos = (((uint)this->col)*i) + j;
+                    this->mat[i][j] = mat[pos];
+                }
+            }
+            this->row = row;
+            this->col = col;
+        }
+        ~Matrix(){};
 
-            Matrix operator+(const Matrix& other); // binary plus
-            Matrix& operator+=(const Matrix& other); // binary addition
-            Matrix operator+(); // unary plus
+        bool check_matrix(const Matrix& other) const;
 
-            Matrix operator-(const Matrix& other); // binary minus
-            Matrix& operator-=(const Matrix& other); // binary subtraction
-            Matrix operator-(); // unary minus
+        Matrix operator+(const Matrix& other); // binary plus
+        Matrix& operator+=(const Matrix& other); // binary addition
+        Matrix operator+(); // unary plus
 
-            // comparing operators
-            bool operator==(const Matrix& mat);
-            bool operator<(const Matrix& mat);
-            bool operator>(const Matrix& mat);
-            bool operator<=(const Matrix& mat);
-            bool operator>=(const Matrix& mat);
-            bool operator!=(const Matrix& mat);
+        Matrix operator-(const Matrix& other); // binary minus
+        Matrix& operator-=(const Matrix& other); // binary subtraction
+        Matrix operator-(); // unary minus
 
-            // multiplying operators
-            friend Matrix operator*(double a, Matrix& mat);
-            Matrix operator*(double a);
-            Matrix& operator*=(double a);
-            Matrix operator*(const Matrix& a);
-            Matrix& operator*=(const Matrix& a);
+        // comparing operators
+        bool operator==(const Matrix& mat);
+        bool operator<(const Matrix& mat);
+        bool operator>(const Matrix& mat);
+        bool operator<=(const Matrix& mat);
+        bool operator>=(const Matrix& mat);
+        bool operator!=(const Matrix& mat);
 
-            // postfix and prefix addition and subtraction
-            Matrix& operator++(); // prefix operator i.e ++mat
-            Matrix operator++(int); // suffix operator i.e mat++
-            Matrix& operator--(); // prefix operator i.e --mat
-            Matrix operator--(int); // suffix operator i.e mat--
+        // multiplying operators
+        friend Matrix operator*(double a, Matrix& mat);
+        Matrix operator*(double a);
+        Matrix& operator*=(double a);
+        Matrix operator*(const Matrix& a);
+        Matrix& operator*=(const Matrix& a);
 
-            // input output operators
-            friend std::ostream& operator<<(std::ostream& os, const Matrix& mat);
-            friend std::istream& operator>>(std::istream& is, const Matrix& mat);
+        // postfix and prefix addition and subtraction
+        Matrix& operator++(); // prefix operator i.e ++mat
+        Matrix operator++(int); // suffix operator i.e mat++
+        Matrix& operator--(); // prefix operator i.e --mat
+        Matrix operator--(int); // suffix operator i.e mat--
+
+        // input output operators
+        friend std::ostream& operator<<(std::ostream& os, const Matrix& mat);
+        friend std::istream& operator>>(std::istream& is, const Matrix& mat);
     };
 
 }
