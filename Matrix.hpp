@@ -6,7 +6,7 @@
 
 namespace zich{
     class Matrix{
-    public:
+    private:
         std::vector<std::vector<double>> mat;
         int row;
         int col;
