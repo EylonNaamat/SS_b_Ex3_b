@@ -72,7 +72,7 @@ namespace zich{
 
         // input output operators
         friend std::ostream& operator<<(std::ostream& os, const Matrix& mat);
-        friend std::istream& operator>>(std::istream& is, const Matrix& mat);
+        friend std::istream& operator>>(std::istream& is, Matrix& mat);
     };
 
 }

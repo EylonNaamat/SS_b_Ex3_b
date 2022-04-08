@@ -3,16 +3,17 @@
 //
 #include <iostream>
 #include <vector>
+#include <iterator>
 #include "Matrix.hpp"
 using namespace std;
 using namespace zich;
 
 int main(){
-    std::vector<double> identity = {1, 0, 0, 0, 1, 0, 0, 0, 1};
-    std::vector<double> arr = {3, 1, 0, 0, 3, 0, 0, 0, 3};
-    Matrix a{identity, 3, 3};
-    Matrix b{arr, 3, 3};
-    std::cout << a << std::endl;
+//    std::vector<double> identity = {1, 0, 0, 0, 1, 0, 0, 0, 1};
+//    std::vector<double> arr = {3, 1, 0, 0, 3, 0, 0, 0, 3};
+//    Matrix a{identity, 3, 3};
+//    Matrix b{arr, 3, 3};
+//    std::cout << a << std::endl;
 //    std::cout << ((a++) == a) << endl;
 //    Matrix c = a;
 //    --a;
@@ -34,6 +35,17 @@ int main(){
 //        std::cout << std::endl;
 //    }
 
+
+//    istream_iterator<string>ii(cin);
+//    istream_iterator<string>eos;
+//    string s1 = *ii;
+//    ++ii;
+//    string s2 = *ii;
+//    cout <<s1 << ' '<< s2 <<'\n';
+
+Matrix a;
+std::cin >> a;
+std::cout << a;
 
 
 

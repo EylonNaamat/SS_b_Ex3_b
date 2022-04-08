@@ -1,4 +1,5 @@
 #include "Matrix.hpp"
+#include <string>
 
 
 bool zich::Matrix::check_matrix(const Matrix& other) const{
@@ -279,6 +280,56 @@ std::ostream& zich::operator<<(std::ostream& os, const zich::Matrix& mat){
     return os;
 }
 
-std::istream& zich::operator>>(std::istream& is, const zich::Matrix& mat){
+std::istream& zich::operator>>(std::istream& is, zich::Matrix& mat){
+
+// [1 0 0], [0 1 0], [0 0 1]
+
+    bool flag = true;
+    int r = 0;
+    std::string str_num;
+    double curr_num = 0;
+    int c = 0;
+    int prev_col = 0;
+    std::vector<double> vec;
+    for(char a = char(is.get()); a != '\n'; a = is.get()){
+        if(a == '['){
+            flag = true;
+            r++;
+            if(c == 0){
+                c = prev_col;
+            }else if(prev_col != c){
+                throw std::invalid_argument("number of columns is not good!!!!!");
+            }
+            prev_col = 0;
+            continue;
+        }
+        if(a == ' ' || a == ']'){
+            if(flag){
+                try{
+                    curr_num = std::stod(str_num);
+                }catch (...){
+                    throw std::invalid_argument("bad input!!!!!");
+                }
+                vec.push_back(curr_num);
+                prev_col++;
+                str_num = "";
+            }
+            continue;
+        }
+        if(a == ','){
+            flag = false;
+            continue;
+        }
+        str_num += a;
+    }
+    mat.col = c;
+    mat.row = r;
+    mat.mat.assign((uint)(r), std::vector<double>((uint)c));
+    for(uint i = 0; i < r; ++i){
+        for(uint j = 0; j < c; ++j){
+            uint pos = (((uint)c)*i) + j;
+            mat.mat[i][j] = vec[pos];
+        }
+    }
     return is;
 }
