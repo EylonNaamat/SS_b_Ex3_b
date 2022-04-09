@@ -15,29 +15,31 @@ namespace zich{
     public:
         // constructor destructor
         Matrix(){
+            // default constructor matrix : [1]
             row = 1;
             col = 1;
             this->mat.assign(1, std::vector<double>(1));
             this->mat[0][0] = 1;
         }
         Matrix(std::vector<double> mat, int row, int col){
-            if(row < this->min_num || col < this->min_num){
+            // constructor with arguments
+            if(row < this->min_num || col < this->min_num){ // if the number of row or columns is not good throw exception
                 throw std::invalid_argument("size of matrix not good");
             }
-            if(mat.size() != (row * col)){
+            if(mat.size() != (row * col)){ // if the matrix size does not fit it actual size throw exception
                 throw std::invalid_argument("size of matrix not good!!!");
             }
             this->row = row;
             this->col = col;
-            this->mat.assign((uint)(this->row), std::vector<double>((uint)this->col));
-            for(uint i = 0; i < row; ++i){
+            this->mat.assign((uint)(this->row), std::vector<double>((uint)this->col)); // assigning the matrix row times vector of double the size of colummns
+            for(uint i = 0; i < row; ++i){ // filling the matrix according to the vector we got
                 for(uint j = 0; j < col; ++j){
                     uint pos = (((uint)this->col)*i) + j;
                     this->mat[i][j] = mat[pos];
                 }
             }
         }
-        ~Matrix(){};
+        ~Matrix(){}; // destructor
 
         bool check_matrix(const Matrix& other) const;
 
