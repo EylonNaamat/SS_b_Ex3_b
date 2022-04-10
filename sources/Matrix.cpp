@@ -134,6 +134,20 @@ zich::Matrix zich::Matrix::operator-(){
     return zich::Matrix{ans, this->row, this->col};
 }
 
+bool zich::operator==(const Matrix& a, const Matrix& b){
+    if(a.row != b.row || a.col != b.col){
+        throw std::invalid_argument("size not good");
+    }
+    for(uint i = 0; i < a.row; ++i){
+        for(uint j = 0; j < a.col; ++j){
+            if(a.mat[i][j] != b.mat[i][j]){
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 /**
  * this function gets a matrix and returns if this matrix is exactly the same as the other matrix
  * if the size isnt the same throw exception
@@ -447,7 +461,9 @@ std::ostream& zich::operator<<(std::ostream& os, const zich::Matrix& mat){
             }
         }
         os << "]";
-        os << "\n";
+        if(i != mat.row-1){
+            os << "\n";
+        }
     }
     return os;
 }
@@ -473,7 +489,7 @@ std::istream& zich::operator>>(std::istream& is, zich::Matrix& mat){
     int c = 0;
     int prev_col = 0;
     std::vector<double> vec;
-    for(char a = char(is.get()); a != '\n'; a = is.get()){
+    for(char a = char(is.get()); (a != '\n') && (a != EOF); a = is.get()){
         if(a == '['){
             flag = true;
             r++;

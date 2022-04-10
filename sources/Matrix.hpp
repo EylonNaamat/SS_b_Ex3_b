@@ -53,6 +53,7 @@ namespace zich{
 
         // comparing operators
         bool operator==(const Matrix& mat);
+        friend bool operator==(const Matrix& a, const Matrix& b);
         bool operator<(const Matrix& mat);
         bool operator>(const Matrix& mat);
         bool operator<=(const Matrix& mat);
