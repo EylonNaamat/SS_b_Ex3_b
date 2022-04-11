@@ -482,14 +482,22 @@ std::ostream& zich::operator<<(std::ostream& os, const zich::Matrix& mat){
  * @return
  */
 std::istream& zich::operator>>(std::istream& is, zich::Matrix& mat){
-    bool flag = true;
-    int r = 0;
+    bool flag = true;  // flag to check if the ' ' we got is between number in a row or a ' ' between rows in the input
+    bool flag2 = true; // flag to check if after "," comes space
+    int r = 0;  // a row counter, count when sees '['
+    int b_r = 0;  // a row checker, count when sees ']'
     std::string str_num;
     double curr_num = 0;
     int c = 0;
     int prev_col = 0;
     std::vector<double> vec;
     for(char a = char(is.get()); (a != '\n') && (a != EOF); a = is.get()){
+        if(!flag2 && a != ' '){
+            throw std::invalid_argument("bad input");
+        }
+        if(a == ' '){
+            flag2 = true;
+        }
         if(a == '['){
             flag = true;
             r++;
@@ -512,12 +520,17 @@ std::istream& zich::operator>>(std::istream& is, zich::Matrix& mat){
                         throw std::invalid_argument("number of columns is not good!!!!!");
                     }
                     prev_col = 0;
+                    b_r++;
+                    if(b_r != r){
+                        throw std::invalid_argument("bad input!");
+                    }
                 }
             }
             continue;
         }
         if(a == ','){
             flag = false;
+            flag2 = false;
             continue;
         }
         str_num += a;
@@ -533,3 +546,5 @@ std::istream& zich::operator>>(std::istream& is, zich::Matrix& mat){
     }
     return is;
 }
+
+
