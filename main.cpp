@@ -13,6 +13,7 @@ int main(){
     Matrix b;
     double num;
     char y_n;
+    cout.setf(std::ios::boolalpha);
     cout << "enter matrix a" << endl;
     cin >> a;
     cout << "enter matrix b" << endl;
